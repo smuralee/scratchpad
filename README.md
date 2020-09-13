@@ -1,2 +1,1 @@
-# code-playground
-Repository for experiments
+# Scratchpad for code samples
