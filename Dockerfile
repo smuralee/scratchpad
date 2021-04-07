@@ -1,12 +1,19 @@
-FROM node:15-slim
+FROM node:15.13-slim
 
-WORKDIR /usr/src/app
+RUN useradd -u 101 alpha
 
-COPY package*.json ./
+RUN mkdir -p /home/alpha/app/node_modules && chown -R alpha:alpha /home/alpha/app
+RUN mkdir -p /home/alpha/.npm && chown -R alpha:alpha /home/alpha/.npm
+
+WORKDIR /home/alpha/app
+
+USER alpha
+
+COPY --chown=alpha:alpha package*.json ./
 
 RUN npm install
 
-COPY . .
+COPY --chown=alpha:alpha . .
 
 EXPOSE 3000
 
